@@ -1,0 +1,11 @@
+<apex:page standardController="Use_Case__c" extensions="EditUseCaseStepExtension">
+    <apex:form >
+        <apex:pageBlock >
+            <apex:pageBlockTable value="{!UseCaseSteps}" var="u">
+                <apex:column value="{!u.useCsWr.Step_Number__c}"/>
+                <apex:column value="{!u.useCsWr.Step_Description__c}"/>
+                <apex:column value="{!u.useCsWr.Expected_Result__c}"/>
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

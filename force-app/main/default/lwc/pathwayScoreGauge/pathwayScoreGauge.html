@@ -1,0 +1,44 @@
+<template>
+    <div class="gauge-container">
+        <div class="gauge-wrapper">
+            <svg viewBox="0 0 200 200" class="gauge-svg">
+                <!-- Background circle -->
+                <circle cx="100" cy="100" r="80" class="background-circle"></circle>
+                
+                <!-- Foreground circle (progress indicator) -->
+                <circle 
+                    cx="100" 
+                    cy="100" 
+                    r="80" 
+                    class="foreground-circle">
+                </circle>
+                
+                <!-- Center text display -->
+                <g class="center-text-group">
+                    <text x="100" y="100" class="score-percentage">{scorePercentage}%</text>
+                </g>
+            </svg>
+        </div>
+        
+        <div class="score-message">
+            Pathway Score is <span class="status-message">{scoreStatus}</span>
+        </div>
+        
+        <div class="legend-container">
+            <div class="legend-items">
+                <div class="legend-item">
+                    <span class="legend-color fair-color"></span>
+                    <span class="legend-label">0 - 30%<br/>Fair</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-color good-color"></span>
+                    <span class="legend-label">31 - 60%<br/>Good</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-color excellent-color"></span>
+                    <span class="legend-label">61 - 100%<br/>Excellent</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</template>

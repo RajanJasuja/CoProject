@@ -1,0 +1,18 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+	 <lightning:empApi aura:id="empApi"/>
+     <aura:handler name="init" value="{!this}" action="{!c.onInit}"/>
+    <aura:attribute name="queues" type="String" default="no Queue"/>
+    <aura:attribute name="case" type="Case[]" />
+    ********
+    <lightning:formattedText value="{!v.queues}" />
+    <lightning:formattedText value="{!v.Case}" />
+    ******
+<!--
+    <lightning:card>
+              <div class="slds-grid slds-wrap mainDiv">
+                      Case Number : {!case.CaseNumber} <br/>
+                      Case Subject : {!case.Subject}
+              </div>
+        </lightning:card>
+  -->
+</aura:component>

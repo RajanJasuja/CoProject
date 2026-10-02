@@ -1,0 +1,78 @@
+<apex:page controller="testimageController">
+  <!-- Begin Default Content REMOVE THIS -->
+  <apex:form id="myForm">
+  <apex:panelgrid id="myGrid">
+  <apex:inputHidden id="warningA" value="{!testImage1}"  />
+  <apex:inputHidden id="warningB" value="{!testImage2}"  />
+  <apex:inputHidden id="warningC" value="{!testImage3}"  />
+  
+    <apex:outputPanel onclick="showImage('A');" id="A">Rajan</apex:outputPanel>
+    <apex:outputPanel onclick="showImage('B');" id="B">David</apex:outputPanel>
+    <apex:outputPanel onclick="showImage('C');" id="C">Bill</apex:outputPanel>
+
+  <apex:outputPanel id="myImgGrid">
+    <apex:image url="/resource/1263751282000/C"  />
+  </apex:outputPanel>
+      
+  </apex:panelgrid>
+  </apex:form>
+  <script  type="text/javascript">
+
+         var imgGride="{!$Component.myForm.myImgGrid}";
+         var imgGrideObj=document.getElementById(imgGride);
+         showImage('A');
+         
+     function showImage(m)
+      {
+         var imgGride="{!$Component.myForm.myImgGrid}";
+         var imgGrideObj=document.getElementById(imgGride);
+         var idImageList="{!$Component.myForm}"+":warning"+m;
+         var listImages=document.getElementById(idImageList);
+         var imgName=listImages.value.split(";");
+         var imgFlag=true;
+         var totalText='';        
+for (var x = 0; x < imgName.length ; x++)
+{
+ 
+if(imgName[x].toLowerCase() == 'a')
+{
+totalText=totalText+'<img src="{!URLFOR($Resource.A)}" >';
+}
+
+
+if(imgName[x].toLowerCase()=='b')
+{
+totalText=totalText+'<img src="{!URLFOR($Resource.B)}" >';
+}
+
+if(imgName[x].toLowerCase()=='c')
+{
+totalText=totalText+'<img src="{!URLFOR($Resource.C)}" >';
+}
+
+imgGrideObj.innerHTML=totalText;
+imgFlag=false;  
+               
+               
+}
+
+
+if(imgFlag)
+imgGrideObj.innerHTML='<TR><TD>No Warnig</TD></TR>';
+
+
+         
+         
+         
+      }
+      
+      /*
+      var a="{!URLFOR($Resource.A)}"
+      var a="{!$Component.myForm.panelgroup}";
+      alert(a);
+      a.innerHTML="This is tesing";
+      */
+      
+  </script>
+  
+</apex:page>

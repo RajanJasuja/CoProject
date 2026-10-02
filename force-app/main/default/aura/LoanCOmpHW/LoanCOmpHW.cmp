@@ -1,0 +1,71 @@
+<aura:component implements="lightning:availableForFlowScreens" access="global">
+    
+    <aura:handler name="init" value="{!this}" action="{!c.init}" />
+
+    <aura:attribute name="mortgagePrincipal" type="Integer" />
+    <aura:attribute name="mortgageRate" type="Decimal" />
+    <aura:attribute name="mortgageYears" type="Integer" />
+    <aura:attribute name="monthlyPayment" type="Decimal" default="0.0" />
+
+    <lightning:card title="Mortgage Details">
+        <div class="slds-p-around_medium">
+            <lightning:layout multipleRows="true">
+
+                <!-- Mortgage Principal -->
+                <lightning:layoutItem size="12" padding="around-small">
+                    <lightning:formattedText value="Mortgage Principal ($)" class="slds-text-title_bold" />
+                    <lightning:input 
+                        value="{!v.mortgagePrincipal}" 
+                        class="slds-text-heading_small"
+                        variant="label-hidden" 
+                        onchange="{!c.calculatePayment}"/>
+                    <lightning:slider 
+                        min="1" 
+                        max="10000000" 
+                        step="100"
+                        value="{!v.mortgagePrincipal}"
+                        onchange="{!c.calculatePayment}" />
+                </lightning:layoutItem>
+
+                <!-- Mortgage Rate -->
+                <lightning:layoutItem size="12" padding="around-small">
+                    <lightning:formattedText value="Interest Rate (%)" class="slds-text-title_bold" />
+                    <lightning:input 
+                        value="{!v.mortgageRate}" 
+                        class="slds-text-heading_small"
+                        variant="label-hidden" 
+                        onchange="{!c.calculatePayment}"/>
+                    <lightning:slider 
+                        min="1" 
+                        max="30" 
+                        step="0.25" 
+                        value="{!v.mortgageRate}"
+                        onchange="{!c.calculatePayment}" />
+                </lightning:layoutItem>
+
+                <!-- Mortgage Years -->
+                <lightning:layoutItem size="12" padding="around-small">
+                    <lightning:formattedText value="Loan Term (Years)" class="slds-text-title_bold" />
+                    <lightning:input 
+                        value="{!v.mortgageYears}" 
+                        class="slds-text-heading_small"
+                        variant="label-hidden"
+                        onchange="{!c.calculatePayment}"/>
+                    <lightning:slider 
+                        min="1" 
+                        max="50" 
+                        step="1" 
+                        value="{!v.mortgageYears}"
+                        onchange="{!c.calculatePayment}" />
+                </lightning:layoutItem>
+
+                <!-- Monthly Payment -->
+                <lightning:layoutItem size="12" padding="around-small">
+                    <lightning:formattedText value="Estimated Monthly Payment" class="slds-text-title_bold" />
+                    <p class="slds-text-heading_medium slds-m-top_small">${!v.monthlyPayment}</p>
+                </lightning:layoutItem>
+
+            </lightning:layout>
+        </div>
+    </lightning:card>
+</aura:component>

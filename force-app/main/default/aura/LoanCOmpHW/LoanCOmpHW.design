@@ -1,0 +1,6 @@
+<design:component>
+	    <design:attribute name="mortgagePrincipal" Label="Mortgage Principal" />
+    	<design:attribute name="mortgageRate" Label="Mortgage Rate" />
+   	 <design:attribute name="mortgageYears" Label="Mortgage Years" />
+
+</design:component>

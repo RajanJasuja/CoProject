@@ -1,0 +1,28 @@
+<apex:page controller="tree" >
+ <apex:pageBlock title="Hello {!$User.FirstName}!"> 
+ <script type="text/javascript" src="/servlet/servlet.FileDownload?file=01560000000Djzv">
+ </script>
+
+<link rel="stylesheet" type="text/css" href="/servlet/servlet.FileDownload?file=01560000000Djzw" />
+<a href="javascript:ddtreemenu.flatten('treemenu1', 'expand')">Expand All</a> | <a href="javascript:ddtreemenu.flatten('treemenu1', 'contact')">Contact All</a>
+<ul  id="treemenu1" class="treeview" >
+<apex:repeat value="{!grouping}" var="group">
+<li>{!group.name}</li>
+<apex:repeat value="{!group.categories}" var="cat">
+<li style="background-image: url(/servlet/servlet.FileDownload?file=01560000000Djzq);" class="submenu" > <a href="#">{!cat.name}</a>
+<ul style="display: none;" rel="closed" ><apex:repeat value="{!cat.topics__r}" var="topic__c">
+<li><a href="#">{!topic__c.name}</a></li>
+</apex:repeat>
+</ul>
+</li>
+</apex:repeat>
+</apex:repeat>
+</ul>
+
+<script type="text/javascript">
+ddtreemenu.createTree("treemenu1", true)
+ddtreemenu.createTree("treemenu2", false)
+</script>
+
+</apex:pageBlock>
+</apex:page>

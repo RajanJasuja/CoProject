@@ -1,0 +1,26 @@
+<apex:component controller="FormFieldController">
+
+	<apex:attribute name="field" description="This is the field that this component wil render" type="Form_Field__c" required="true" assignTo="{!field}"/>
+	<apex:attribute name="width" description="Indicates the width of the input field" type="Integer" required="true"/>
+	
+	<!-- Input fields for the different possible field types -->
+	<apex:inputField value="{!field.Text_Value__c}" rendered="{!field.Type__c == 'STRING'}" style="width: {!field.Width__c}px;"/>
+	<apex:inputField value="{!field.Date_Value__c}" rendered="{!field.Type__c == 'DATE'}" style="width: {!field.Width__c}px;"/>
+	<apex:inputField value="{!field.DateTime_Value__c}" rendered="{!field.Type__c == 'DATETIME'}" style="width: {!field.Width__c}px;"/>
+	<apex:inputField value="{!field.Email_Value__c}" rendered="{!field.Type__c == 'EMAIL'}" style="width: {!field.Width__c}px;"/>
+	<apex:inputField value="{!field.Boolean_Value__c}" rendered="{!field.Type__c == 'BOOLEAN'}"/>
+	<apex:inputField value="{!field.URL_Value__c}" rendered="{!field.Type__c == 'URL'}" style="width: {!field.Width__c}px;"/>
+	<apex:inputField value="{!field.Currency_Value__c}" rendered="{!field.Type__c == 'CURRENCY'}" style="width: {!field.Width__c}px;"/>
+	<apex:inputField value="{!field.Number_Value__c}" rendered="{!field.Type__c == 'DOUBLE'}" style="width: {!field.Width__c}px;"/>
+	<apex:inputField value="{!field.Percent_Value__c}" rendered="{!field.Type__c == 'PERCENT'}" style="width: {!field.Width__c}px;"/>
+	<apex:inputField value="{!field.Text_Area_Value__c}" rendered="{!field.Type__c == 'TEXTAREA'}" style="width: {!field.Width__c}px;"/>
+	<apex:inputField value="{!field.Phone_Value__c}" rendered="{!field.Type__c == 'PHONE'}" style="width: {!field.Width__c}px;"/>
+	
+
+	<apex:selectList value="{!field.Picklist_Value__c}" size="1"  rendered="{!field.Type__c == 'PICKLIST'}" style="width: {!field.Width__c}px;">
+			<apex:selectOptions value="{!picklistSelectOptions}"/>			
+	</apex:selectList>
+
+	<!-- Not Yet Supported -->	
+	<apex:outputText value="not yet supported" rendered="{!field.Type__c == 'MULTIPICKLIST'}"/>
+</apex:component>

@@ -1,0 +1,50 @@
+.wrapper {
+    margin: 0; /* Removes all external margins */
+    padding: 0; /* Removes all internal padding, allowing content to touch the border */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.progress-bar-container {
+    width: 60%;
+    height: 22px;
+    background: #f3f2f2;
+    border-radius: 4px;
+    border: 1px solid #dddbda;
+    overflow: hidden;
+    display: block;
+    position: relative;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+    font-size: 0.75rem;
+    transition: width 0.4s ease;
+}
+
+.progress-label {
+    color: white;
+}
+
+.progress-label-gray {
+    color: white;
+}
+
+.progress-title {
+    margin: 0; /* Removes all external margins */
+    padding: 0; /* Removes all internal padding, allowing content to touch the border */
+    box-sizing: border-box; /* Ensures padding and border are included in the element's total width and height */
+    width: fit-content; /* Adjusts the width of the div to fit its content */
+    /* Or, if you want it to take full width: */
+    /* width: 100%; */
+    font-weight: 600;
+    text-align: center;
+    font-size: 0.85rem;
+    color: #444;
+}

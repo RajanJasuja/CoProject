@@ -1,0 +1,12 @@
+.button-container {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.big-button {
+    font-size: 1.05rem;
+    padding: 0.85rem 2rem;
+    border-radius: 6px;
+}

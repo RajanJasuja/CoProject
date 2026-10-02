@@ -1,0 +1,13 @@
+<template>
+    <div class="wrapper slds-m-vertical_large">
+        <div class="progress-bar-container">
+            <div class="progress-bar-fill" style={computedStyle}>
+                <span class={labelClass}>{Score}%</span>
+            </div>
+        </div>
+       
+        <template if:true={title}>
+            <div class="progress-title">{title}</div>
+        </template>
+    </div>
+</template>

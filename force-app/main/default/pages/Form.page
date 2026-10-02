@@ -1,0 +1,48 @@
+<apex:page controller="FormController" showheader="false">
+
+	<style type="text/css">
+		body, td {
+                 background-color: {!form.Background_Color__c};
+                 color: {!form.Text_Color__c};
+        } 
+        
+        .required, .message {
+        	color: red;
+        }
+	
+	</style>
+
+	
+	<!-- <apex:outputText value="{!form.Name}"/> -->
+
+	<apex:form >
+	<br/>
+		<apex:outputText value="{!form.Title__c}"/>
+	<br/>
+		<apex:messages styleClass="required"/>
+	<br/>
+	<table>
+	<apex:repeat value="{!fields}" var="f">
+		<tr>
+			
+			<apex:outputPanel rendered="{!f.Type__c == 'CUSTOMTEXT'}">
+			<td colspan="2">{!f.Label__c}</td>
+			</apex:outputPanel>
+			
+			<apex:outputPanel rendered="{!f.Type__c != 'CUSTOMTEXT'}">
+			<td>{!f.Label__c}</td>
+			<td>
+				<c:inputFormField field="{!f}" width="400"/>
+				<apex:outputLabel value=" *" rendered="{!f.Required__c}" styleClass="required"/>
+			</td>
+			</apex:outputPanel>
+			<!-- <td>(<apex:outputText value="{!f.Type__c}"/>)</td> --></tr>
+	</apex:repeat>
+	<tr><td></td><td></td></tr>
+	<tr><td></td><td><apex:commandButton value="{!form.Save_Button_Text__c}" action="{!saveObject}"/></td></tr>
+	</table>
+	
+	
+	
+	</apex:form>
+</apex:page>

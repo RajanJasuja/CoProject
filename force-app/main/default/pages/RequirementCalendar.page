@@ -1,0 +1,124 @@
+<apex:page standardController="Requirement__c" extensions="RequirementCalendarController">
+<!-- load fullCalendar Plugin -->
+  <apex:stylesheet value="{!URLFOR($Resource.fullCalendar, '/fullcalendar.css')}"/>
+  <apex:stylesheet value="{!URLFOR($Resource.fullCalendar, '/fullcalendar.print.css media=print')}"/>
+  <apex:stylesheet value="{!URLFOR($Resource.fullCalendar, '/screen.css')}"/>
+  <apex:stylesheet value="{!URLFOR($Resource.fullCalendar, '/examples.css')}"/>
+  <apex:includeScript value="{!URLFOR($Resource.fullCalendar, '/jquery-1.7.1.min.js')}"/>
+  <apex:includeScript value="{!URLFOR($Resource.fullCalendar, '/jquery-ui-1.8.17.custom.min.js')}"/>
+  <apex:includeScript value="{!URLFOR($Resource.fullCalendar, '/fullcalendar.min.js')}"/>
+  <apex:includeScript value="{!URLFOR($Resource.fullCalendar, '/jquery-impromptu.4.0.min.js')}"/>
+  <apex:includeScript value="{!URLFOR($Resource.fullCalendar, '/jquery.corner.js')}"/>
+  <apex:includeScript value="{!URLFOR($Resource.fullCalendar, '/common.js')}"/>
+  
+  <!---->
+  
+    Requirement Analysis: <span style="background:red">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
+    Biz Process: <span style="background:green;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+    Technical Design: <span style="background:purple;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+    Configuration: <span style="background:indigo;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+    Development: <span style="background:blue;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+    Others: <span style="background:orange;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+    <br/>  
+    <br/>  
+  <div id="testID" style="display:none">
+  <apex:outputPanel id="out">
+
+    
+  <apex:outputText value="Hello "/>
+  <apex:actionStatus startText="requesting..." id="myStatus">
+        <apex:facet name="stop">{!eventLsitString}</apex:facet>
+  </apex:actionStatus>
+  <input type="text" name="eventString" id="eventString1" value="{!eventLsitString}" />
+  </apex:outputPanel>
+  </div>
+  
+  <!--FullCalendar Initialize-->
+  <script type='text/javascript'>
+      $(document).ready(function() {
+          function mycallbackform(e,v,m,f){
+              if(v != undefined){
+                    alert(v +' ' + f.alertName + ' ' + m.html());
+                }
+          }
+        
+          var eventsArrayString = document.getElementById('eventString1').value;
+          var eventArray = '';
+          if(eventsArrayString!=']'){
+            eventArray= eval('('+eventsArrayString+')');
+
+            for(var i=0;i<eventArray.length;i++){
+                eventArray[i].allDay = false;
+            }
+          }else{
+            eventArray = '';
+          }
+               
+          var calendar = $('#calendar').fullCalendar({
+              //theme: true, 
+              header: {
+                  left: 'prev,next today',
+                  center: 'title',
+                  right: 'month,agendaWeek,agendaDay'
+              },
+              /*********select------------------------------------------------------------------------*********************************/
+              selectable: false,
+              selectHelper: false,
+              select: function(start, end, allDay) {
+                                     
+                    var txt = 'Please enter your work task:<br />Work Task: <input type="text" id="alertName" name="alertName" value="" />';
+                    txt += '<br />Estimate Hours: <input type="text" id="estimateHours" name="estimateHours" />';
+                    txt += '<br />Type: <input type="text" id="taskType" name="taskType" />';
+                    
+                    var title = '';
+                    $.prompt(txt,
+                    {
+                        callback: function(e,v,m,f){
+                               
+                            title = f.alertName;
+                            calendar.fullCalendar('renderEvent',
+                            {
+                                title: title,
+                                start: start,
+                                end: end,
+                                allDay: allDay
+                            },
+                            true // make the event "stick"
+                            );
+                                
+                        },
+                        buttons: { Set: 'Set', Cancel: 'Cancel' }
+                    });
+                    calendar.fullCalendar('unselect');
+              },
+                
+             /*********select------------------------------------------------------------------------*********************************/     
+             editable: false,
+             
+             
+             /*********event------------------------------------------------------------------------*********************************/     
+             events: eventArray
+        });      
+    });
+</script>
+
+<style type='text/css'>
+
+    body {
+        margin-top: 20px;
+        text-align: center;
+        font-size: 14px;
+        font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif;
+        }
+
+    #calendar {
+        width: 700px;
+        margin: 0 auto;
+        }
+
+</style>
+
+    <apex:pageBlock >
+         <div id='calendar'></div>
+    </apex:pageBlock>
+</apex:page>

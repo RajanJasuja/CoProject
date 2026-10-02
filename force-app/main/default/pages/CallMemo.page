@@ -1,0 +1,20 @@
+<apex:page standardController="Call_Memo__c" >
+
+<apex:form >
+    <apex:pageBlock title="New call Memo" mode="edit">
+        <apex:pageBlockButtons >
+            <apex:commandButton value="Save"/>
+            <apex:commandButton value="Cancel"/>
+        </apex:pageBlockButtons>
+        <apex:pageBlockSection title="Order Information" columns="2">
+            <apex:inputField value="{!Call_Memo__c.name}" />
+            <apex:inputField label="{!Call_Memo__c.Account__c}" />
+            <apex:inputField label="{!Call_Memo__c.Contact__c}" />
+            <apex:inputField label="{!Call_Memo__c.DetailText__c}" />
+            <apex:inputField label="{!Call_Memo__c.Text_Area_Rich__c}" />
+            
+        </apex:pageBlockSection>
+    </apex:pageBlock>
+</apex:form>
+
+</apex:page>

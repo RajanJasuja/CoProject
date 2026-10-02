@@ -1,0 +1,12 @@
+<apex:page standardController="Account" extensions="ExtensionAccount">
+
+  <apex:form >
+        <apex:pageBlock >
+        <apex:pageBlockSection title="Account Detail">
+        <apex:outputField value="{!accObj.phone}" />
+        <apex:outputField value="{!accObj.fax}" />
+        <apex:outputField value="{!accObj.website}" />
+        </apex:pageBlockSection>
+        </apex:pageBlock>
+  </apex:form>
+</apex:page>

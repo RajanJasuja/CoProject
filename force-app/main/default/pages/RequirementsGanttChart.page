@@ -1,0 +1,14 @@
+<apex:page standardController="Work_Package__c" extensions="RequirementChartsGanttHelper" sidebar="false">
+    <br/>
+    Current: <span style="background:#EEAA66;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span> 
+    Completed: <span style="background:#333333;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+    Future: <span style="background:#3980F4;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+    Delayed: <span style="background:#ee3322;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+    <apex:form >
+        <apex:commandLink target="_self" action="{!cancel}" 
+                    rendered="{!!allowView}" >Back</apex:commandLink>
+        <c:RequirementChartsGanttComponent target="{!myId}"/>
+        <apex:outputLink target="_top" value="{!$Page.RequirementsGanttChart}?Id={!myId}&p" 
+                    rendered="{!allowView}">[Full View]</apex:outputLink> 
+    </apex:form>
+</apex:page>

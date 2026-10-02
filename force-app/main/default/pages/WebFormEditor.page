@@ -1,0 +1,179 @@
+<apex:page tabStyle="Web_Form__c" standardController="Web_Form__c" extensions="WebFormEditorController">
+
+	<style type="text/css">
+       
+       .message {
+        	color: red;
+        }
+	
+	</style>
+
+	<script type="text/javascript" src="{!URLFOR($Resource.ColorPicker, '/jscolor.js')}"/>
+
+	<apex:messages styleClass="message" />
+    
+	<apex:form >
+
+	<apex:sectionHeader title="Web Form" subtitle="editor"/>
+						
+	<apex:PageBlock title="Web Form Editor">
+	
+		
+	
+		<!-- Button Section -->
+		<apex:pageBlockButtons >
+			<apex:commandButton value="Save" action="{!save}" status="status"/>	
+			<apex:commandButton value="Cancel" action="{!cancel}" status="status"/>							
+		</apex:pageBlockButtons>
+		
+		<apex:PageBlockSection title="Select an Object">
+			<apex:pageBlockSectionItem >
+				Name : <apex:inputText value="{!webform.Name}" style="width:250px;"/>
+			</apex:pageBlockSectionItem>
+			
+				<!-- Selector for the object on which the form will be based -->
+				<apex:outputPanel id="objectSelector">			
+				<apex:selectList value="{!selectedObject}" size="1">
+					<apex:selectOptions value="{!objectSelectOptions}"/>			
+				</apex:selectList>			
+				<apex:commandButton action="{!selectobject}" value="select" rerender="objectSelector, objectfieldsPanel, formfieldsPanel" status="status"/>
+				</apex:outputPanel><br/>
+			<apex:pageBlockSectionItem />
+			<apex:pageBlockSectionItem >		
+				{!$ObjectType.Web_Form__c.fields.Description__c.label} : <apex:inputField value="{!webform.Description__c}" style="width:250px;"/>
+			</apex:pageBlockSectionItem>
+			<apex:pageBlockSectionItem >		
+				{!$ObjectType.Web_Form__c.fields.Return_URL__c.label} : <apex:inputField value="{!webform.Return_URL__c}" style="width:250px;"/>
+			</apex:pageBlockSectionItem>	
+			<apex:pageBlockSectionItem rendered="{!NOT(ISNULL(webform.ID))}">		
+				Web Form ID : <apex:inputField value="{!webform.ID}" style="width:250px;"/>
+			</apex:pageBlockSectionItem>		
+		</apex:PageBlockSection>
+		
+		<apex:PageBlockSection title="Layout options">
+			<apex:pageBlockSectionItem >
+				{!$ObjectType.Web_Form__c.fields.Title__c.label} : <apex:inputField value="{!webform.Title__c}" style="width:250px;"/>
+			</apex:pageBlockSectionItem>
+			<apex:pageBlockSectionItem >
+				{!$ObjectType.Web_Form__c.fields.Background_Color__c.label} : <apex:inputField value="{!webform.Background_Color__c}" styleClass="color"/>
+			</apex:pageBlockSectionItem>
+			<apex:pageBlockSectionItem >
+				{!$ObjectType.Web_Form__c.fields.Save_Button_Text__c.label} : <apex:inputField value="{!webform.Save_Button_Text__c}" style="width:250px;"/>
+			</apex:pageBlockSectionItem>
+			<apex:pageBlockSectionItem >
+				{!$ObjectType.Web_Form__c.fields.Text_Color__c.label} : <apex:inputField value="{!webform.Text_Color__c}" styleClass="color"/>
+			</apex:pageBlockSectionItem>	
+			<apex:pageBlockSectionItem >
+				<apex:outputLabel value=""/>
+				
+			</apex:pageBlockSectionItem>		
+		</apex:PageBlockSection>
+		
+		<!-- Field List -->
+		<apex:PageBlockSection title="Fields {!IF(NOT(ISNULL(selectedObjectLabel)), 'for '+selectedObjectLabel, '')}" columns="3">
+		
+			<!-- <apex:panelGrid columns="3" id="fieldsGrid"> -->
+
+	   	 	<!--  Object Fields -->
+			<apex:outputPanel id="objectfieldsPanel">
+						
+	   	 	<apex:pageBlockTable value="{!objectFields}" var="f" id="objectfieldsTable">
+	            <apex:column value="{!f.Label__c}">
+	                <apex:facet name="header">Label</apex:facet>
+	            </apex:column>
+	            <!-- <apex:column value="{!f.Name}">
+	                <apex:facet name="header">Name</apex:facet>
+	            </apex:column> -->
+	            <apex:column value="{!f.Type__c}">
+	                <apex:facet name="header">Type</apex:facet>
+	            </apex:column>
+	            <apex:column value="{!f.Required__c}">
+	                <apex:facet name="header">Req.</apex:facet>
+	            </apex:column>
+	            <apex:column >
+                     <apex:commandLink action="{!addField}" rerender="formfieldsPanel, objectfieldsPanel" status="status">                     	
+                        <apex:param name="fieldname" value="{!f.Name}"></apex:param>
+                        <apex:image url="{!URLFOR($Resource.Icons, '/Colored/PNG/action_add.png')}" title="Add"/>
+                     </apex:commandLink>
+                </apex:column>
+            </apex:pageBlockTable>
+            
+            
+            <!--  Allow users to add a custom text line or blank spacer -->
+            <br/>
+            <table>
+            	<tr>
+            		<td>
+			            <apex:OutputLabel value=" Add custom text or blank line " rendered="{!formFieldsSize >0}"/>&nbsp;&nbsp;
+            		</td>
+            		<td>
+            			<apex:commandLink action="{!addCustomField}" rerender="formfieldsPanel, objectfieldsPanel" status="status"  rendered="{!formFieldsSize >0}">                     	                        
+                        	<apex:image url="{!URLFOR($Resource.Icons, '/Colored/PNG/action_add.png')}" title="Add"/>
+                     	</apex:commandLink>
+                     </td>
+                </tr>
+            </table>
+            </apex:outputPanel>
+            
+            
+            
+            <!-- Form Fields -->
+            <apex:outputPanel id="formfieldsPanel">            
+            <apex:pageBlockTable value="{!formFields}" var="f" id="formfieldsTable">
+	            <apex:column >
+	                <apex:facet name="header">Form Label</apex:facet>
+	                <apex:inputField value="{!f.Label__c}" style="width:250px;"/>
+	            </apex:column>
+	            <!-- <apex:column value="{!f.Name}">
+	                <apex:facet name="header">Name</apex:facet>
+	            </apex:column> -->
+	            <apex:column value="{!f.Type__c}">
+	                <apex:facet name="header">Type</apex:facet>
+	            </apex:column>
+	            <apex:column >
+	                <apex:facet name="header">Req.</apex:facet>
+	                <apex:inputField value="{!f.Required__c}"/>
+	            </apex:column>
+	           	<apex:column style="width: 100px;">
+	                <apex:facet name="header">width (px)</apex:facet>
+	                <apex:inputField value="{!f.Width__c}" style="width: 30px;"/>
+	            </apex:column>
+	            <apex:column value="{!f.Order__c}">
+	                <apex:facet name="header">Order</apex:facet>
+	            </apex:column>
+	            <apex:column >
+                     <apex:commandLink action="{!removeField}" rerender="formfieldsPanel, objectfieldsPanel" status="status">
+                        <apex:param name="fieldname" value="{!f.Name}"></apex:param>
+                        <apex:image url="{!URLFOR($Resource.Icons, '/Colored/PNG/action_delete.png')}" title="Remove"/>
+                     </apex:commandLink>
+                </apex:column>
+                <apex:column >
+                     <apex:commandLink action="{!moveUp}" rerender="formfieldsPanel" rendered="{!f.Order__c > 1}" status="status">
+                        <apex:param name="fieldname" value="{!f.Name}"></apex:param>
+                        <apex:image url="{!URLFOR($Resource.Icons, '/Colored/PNG/arrow_top.png')}" title="Up"/>
+                     </apex:commandLink>
+                </apex:column>
+                 <apex:column >
+                     <apex:commandLink action="{!moveDown}" rerender="formfieldsPanel" rendered="{!f.Order__c < formFieldsSize}" status="status">
+                        <apex:param name="fieldname" value="{!f.Name}"></apex:param>
+                        <apex:image url="{!URLFOR($Resource.Icons, '/Colored/PNG/arrow_down.png')}" title="Down"/>
+                     </apex:commandLink>
+                </apex:column>
+            </apex:pageBlockTable>
+           	</apex:outputPanel>
+				
+				<apex:actionStatus stopText="" id="status">	
+					<apex:facet name="start">				
+						<apex:image url="{!URLFOR($Resource.Icons, '/Colored/PNG/time.png')}" title="Wait..."/>									
+					</apex:facet>
+				</apex:actionStatus>
+
+            <!-- </apex:panelGrid> -->
+
+		   	
+   		</apex:PageBlockSection>
+   	</apex:PageBlock>
+   	
+	</apex:form>
+
+</apex:page>

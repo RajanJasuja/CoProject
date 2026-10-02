@@ -1,0 +1,9 @@
+<apex:page controller="actionfunctiontestcontroller">
+<apex:form id="frm">
+<apex:actionFunction name="goToHostList" action="{!CallHostList}" reRender="frm">
+<apex:param name="str" assignto="{!termId}" value="xyz" />
+</apex:actionFunction>
+<apex:outputPanel onclick="goToHostList('abc');">Test</apex:outputPanel>
+<apex:outputPanel >{!termId}</apex:outputPanel>
+</apex:form>
+</apex:page>

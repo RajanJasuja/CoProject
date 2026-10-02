@@ -1,0 +1,98 @@
+<!-- customerProfile.html -->
+<template>
+    <div class="profile-card">
+        <template if:true={isLoading}>
+            <lightning-spinner alternative-text="Loading" size="medium"></lightning-spinner>
+        </template>
+        
+        <template if:false={isLoading}>
+            <template if:true={hasError}>
+                <div class="slds-text-color_error slds-p-around_medium">
+                    <p>{errorMessage}</p>
+                </div>
+            </template>
+            
+            <template if:false={hasError}>
+                <!-- Header Section with Avatar and Name -->
+                <div class="profile-header">
+                    <div class="avatar-container">
+                        <img src={avatarUrl} alt={accountName} class="avatar" 
+                             onerror={handleImageError} />
+                    </div>
+                    <h1 class="customer-name">{accountName}</h1>
+                    <p class="customer-location">{location}</p>
+                </div>
+                
+                <!-- Info Section -->
+                <div class="info-section">
+                    <template for:each={infoFields} for:item="field">
+                        <div key={field.apiName} class="info-item">
+                            <lightning-icon 
+                                icon-name={field.iconName} 
+                                size="small"
+                                class="info-icon">
+                            </lightning-icon>
+                            <div class="info-content">
+                                <span class="info-label">{field.label}</span>
+                                <span class="info-value">
+                                    <template if:true={field.isEmail}>
+                                        <a href={field.emailLink}>{field.value}</a>
+                                    </template>
+                                    <template if:true={field.isPhone}>
+                                        <a href={field.phoneLink}>{field.value}</a>
+                                    </template>
+                                    <template if:false={field.isEmail}>
+                                        <template if:false={field.isPhone}>
+                                            {field.value}
+                                        </template>
+                                    </template>
+                                </span>
+                            </div>
+                        </div>
+                    </template>
+                </div>
+                
+                <!-- Divider -->
+                <template if:true={hasMetrics}>
+                    <div class="section-divider"></div>
+                </template>
+                
+                <!-- Metrics Section -->
+                <template if:true={hasMetrics}>
+                    <div class="metrics-section">
+                        <template for:each={metricFields} for:item="metric">
+                            <div key={metric.apiName} class="metric-item">
+                                <div class="metric-header">
+                                    <lightning-icon 
+                                        icon-name={metric.iconName} 
+                                        size="small"
+                                        class="metric-icon">
+                                    </lightning-icon>
+                                    <span class="metric-label">{metric.label}</span>
+                                    <span class="metric-value">{metric.formattedValue}</span>
+                                </div>
+                                <div class="progress-container">
+                                    <div class="progress-bar" style={metric.progressStyle}></div>
+                                </div>
+                            </div>
+                        </template>
+                    </div>
+                </template>
+                
+                <!-- Footer -->
+                <div class="card-footer">
+                    <span>Powered By</span>
+                    <div class="footer-icons">
+                        <lightning-icon icon-name="utility:settings" size="x-small"></lightning-icon>
+                        <lightning-icon icon-name="utility:cart" size="x-small"></lightning-icon>
+                        <lightning-icon icon-name="utility:search" size="x-small"></lightning-icon>
+                        <lightning-icon icon-name="utility:database" size="x-small"></lightning-icon>
+                        <lightning-icon icon-name="utility:favorite" size="x-small"></lightning-icon>
+                        <lightning-icon icon-name="utility:user" size="x-small"></lightning-icon>
+                        <lightning-icon icon-name="utility:puzzle" size="x-small"></lightning-icon>
+                    </div>
+                </div>
+            </template>
+        </template>
+    </div>
+</template>

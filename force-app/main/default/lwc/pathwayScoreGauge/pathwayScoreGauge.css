@@ -1,0 +1,131 @@
+.gauge-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5px 10px;
+    background-color: transparent;
+    border-radius: 8px;
+    width: 100%;
+    max-height: 20%;
+    gap: 0;
+}
+
+.gauge-wrapper {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+    max-width: 100px;
+    margin: 0;
+}
+
+.gauge-svg {
+    width: 100%;
+    height: 100%;
+}
+
+.background-circle {
+    fill: none;
+    stroke: #e0e0e0;
+    stroke-width: 16;
+}
+
+.foreground-circle {
+    fill: none;
+    stroke-width: 16;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transition: stroke 0.3s ease, stroke-dashoffset 0.8s ease;
+}
+
+.center-text-group {
+    text-anchor: middle;
+    dominant-baseline: middle;
+}
+
+.score-percentage {
+    font-size: 48px;
+    font-weight: bold;
+    fill: #333;
+}
+
+.score-label {
+    font-size: 16px;
+    fill: #666;
+    font-weight: 500;
+}
+
+.score-message {
+    text-align: center;
+    font-size: 12px;
+    color: #555;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+.status-message {
+    font-weight: bold;
+}
+
+.status-message.fair {
+    color: #E74C3C;
+}
+
+.status-message.good {
+    color: #F39C12;
+}
+
+.status-message.excellent {
+    color: #27AE60;
+}
+
+.legend-container {
+    margin-top: 0px;
+    text-align: center;
+    width: 100%;
+}
+
+.legend-title {
+    font-size: 12px;
+    font-weight: bold;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.legend-items {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 10px;
+}
+
+.legend-color {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.fair-color {
+    background-color: #E74C3C;
+}
+
+.good-color {
+    background-color: #F39C12;
+}
+
+.excellent-color {
+    background-color: #27AE60;
+}
+
+.legend-label {
+    text-align: left;
+    line-height: 1.4;
+    color: #666;
+}

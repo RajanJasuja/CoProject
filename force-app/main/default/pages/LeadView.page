@@ -1,0 +1,83 @@
+<apex:page controller="LeadViewController" tabStyle="Lead">
+<apex:pageBlock >
+    <apex:form >
+        <apex:selectList value="{!selectedField1}" size="1" id="lstField1" onchange="showValue('lstField1')">
+            <apex:selectOptions value="{!leadFields}"></apex:selectOptions>
+        </apex:selectList>&nbsp;&nbsp;
+        <apex:selectList value="{!selectedOperator1}" size="1" id="lstOperator1">
+            <apex:selectOptions value="{!operatorValues}"></apex:selectOptions>
+        </apex:selectList>&nbsp;&nbsp;
+        <apex:inputText value="{!filterValue1}"></apex:inputText>
+        &nbsp;&nbsp;&nbsp;&nbsp;AND<br>
+
+        <apex:selectList value="{!selectedField2}" size="1" id="lstField2" onchange="showValue('lstField2')">
+            <apex:selectOptions value="{!leadFields}"></apex:selectOptions>
+        </apex:selectList>&nbsp;&nbsp;
+        <apex:selectList value="{!selectedOperator2}" size="1" id="lstOperator2">
+            <apex:selectOptions value="{!operatorValues}"></apex:selectOptions>
+        </apex:selectList>&nbsp;&nbsp;
+        <apex:inputText value="{!filterValue2}"></apex:inputText>
+        &nbsp;&nbsp;&nbsp;&nbsp;AND<br>
+
+        <apex:selectList value="{!selectedField3}" size="1" id="lstField3" onchange="showValue('lstField3')">
+            <apex:selectOptions value="{!leadFields}"></apex:selectOptions>
+        </apex:selectList>&nbsp;&nbsp;
+        <apex:selectList value="{!selectedOperator3}" size="1" id="lstOperator3">
+            <apex:selectOptions value="{!operatorValues}"></apex:selectOptions>
+        </apex:selectList>&nbsp;&nbsp;
+        <apex:inputText value="{!filterValue3}"></apex:inputText>
+        &nbsp;&nbsp;&nbsp;&nbsp;AND<br>
+
+        <apex:selectList value="{!selectedField4}" size="1" id="lstField4" onchange="showValue('lstField4')">
+            <apex:selectOptions value="{!leadFields}"></apex:selectOptions>
+        </apex:selectList>&nbsp;&nbsp;
+        <apex:selectList value="{!selectedOperator4}" size="1" id="lstOperator4">
+            <apex:selectOptions value="{!operatorValues}"></apex:selectOptions>
+        </apex:selectList>&nbsp;&nbsp;
+        <apex:inputText value="{!filterValue4}"></apex:inputText>
+        &nbsp;&nbsp;&nbsp;&nbsp;AND<br>
+
+        <apex:selectList value="{!selectedField5}" size="1" id="lstField5" onchange="showValue('lstField5')">
+            <apex:selectOptions value="{!leadFields}"></apex:selectOptions>
+        </apex:selectList>&nbsp;&nbsp;
+        <apex:selectList value="{!selectedOperator5}" size="1" id="lstOperator5">
+            <apex:selectOptions value="{!operatorValues}"></apex:selectOptions>
+        </apex:selectList>&nbsp;&nbsp;
+        <apex:inputText value="{!filterValue5}"></apex:inputText>
+        &nbsp;&nbsp;&nbsp;&nbsp;AND<br>
+                
+        <SCRIPT LANGUAGE="JavaScript">
+            function showValue(ctr){
+                //alert('Ctr is : ' + ctr);
+                var sField;               
+                var iIndex;
+                if(ctr == 'lstField1'){
+                    sField = document.getElementById('{!$Component.lstField1}').value; 
+                    document.getElementById('{!$Component.lstOperator1}').value = 'e';                     
+                    iIndex = sField.indexOf('_');
+                    var sDataType = '';
+                    if(iIndex > 0){
+                        sDataType = sField.substring(iIndex + 1, sField.length);
+                        alert('sDataType is : ' + sDataType);
+                        if(sDataType != 'Schema.DisplayType.STRING'){
+                            alert(document.getElementById('{!$Component.lstOperator1}').options.length);
+                        }
+                    }
+                }else if(ctr == 'lstField2'){
+                    sField = document.getElementById('{!$Component.lstField2}').value; 
+                    document.getElementById('{!$Component.lstOperator2}').value = 'e';                     
+                }else if(ctr == 'lstField3'){
+                    sField = document.getElementById('{!$Component.lstField3}').value; 
+                    document.getElementById('{!$Component.lstOperator3}').value = 'e';                                         
+                }else if(ctr == 'lstField4'){
+                    sField = document.getElementById('{!$Component.lstField4}').value; 
+                    document.getElementById('{!$Component.lstOperator4}').value = 'e';                                         
+                }else if(ctr == 'lstField5'){
+                    sField = document.getElementById('{!$Component.lstField5}').value; 
+                    document.getElementById('{!$Component.lstOperator5}').value = 'e';                                         
+                }
+            }
+        </SCRIPT>
+    </apex:form>    
+</apex:pageBlock>    
+</apex:page>

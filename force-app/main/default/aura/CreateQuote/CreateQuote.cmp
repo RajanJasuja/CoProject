@@ -1,0 +1,9 @@
+<aura:component controller="EinsteinVision_Admin" implements="force:appHostable,flexipage:availableForAllPageTypes,force:lightningQuickAction,force:hasRecordId" access="global" >
+<aura:attribute name="recordId" type="String" />
+<aura:attribute name="Message" type="String" />
+        
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+
+{!v.Message}
+    
+</aura:component>

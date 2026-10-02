@@ -1,0 +1,206 @@
+/* customerProfile.css */
+.profile-card {
+    background: linear-gradient(135deg, #0099cc 0%, #006699 100%);
+    border-radius: 12px;
+    padding: 24px;
+    color: white;
+    font-family: 'Salesforce Sans', Arial, sans-serif;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    margin: 0 auto;
+}
+
+/* Header Section */
+.profile-header {
+    text-align: center;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.avatar-container {
+    width: 80px;
+    height: 80px;
+    margin: 0 auto 16px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    background: white;
+}
+
+.avatar {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.customer-name {
+    font-size: 24px;
+    font-weight: 300;
+    margin: 0 0 8px 0;
+    color: white;
+}
+
+.customer-location {
+    font-size: 14px;
+    opacity: 0.9;
+    margin: 0;
+}
+
+/* Info Section */
+.info-section {
+    padding: 20px 0;
+}
+
+.info-item {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 16px;
+}
+
+.info-icon {
+    --slds-c-icon-color-foreground-default: rgba(255, 255, 255, 0.8);
+    margin-right: 12px;
+    flex-shrink: 0;
+}
+
+.info-content {
+    flex: 1;
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.info-label {
+    font-size: 13px;
+    opacity: 0.9;
+    min-width: 120px;
+}
+
+.info-value {
+    font-size: 14px;
+    font-weight: 400;
+    flex: 1;
+    word-break: break-word;
+}
+
+.info-value a {
+    color: white;
+    text-decoration: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.info-value a:hover {
+    border-bottom-color: white;
+}
+
+/* Section Divider */
+.section-divider {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.2);
+    margin: 20px 0;
+}
+
+/* Metrics Section */
+.metrics-section {
+    padding: 20px 0;
+}
+
+.metric-item {
+    margin-bottom: 24px;
+}
+
+.metric-item:last-child {
+    margin-bottom: 0;
+}
+
+.metric-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.metric-icon {
+    --slds-c-icon-color-foreground-default: rgba(255, 255, 255, 0.8);
+    margin-right: 12px;
+}
+
+.metric-label {
+    flex: 1;
+    font-size: 13px;
+    opacity: 0.9;
+}
+
+.metric-value {
+    font-size: 16px;
+    font-weight: 500;
+}
+
+.progress-container {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 20px;
+    height: 8px;
+    overflow: hidden;
+    margin-top: 8px;
+}
+
+.progress-bar {
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.95) 100%);
+    height: 100%;
+    border-radius: 20px;
+    transition: width 0.5s ease;
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.3);
+}
+
+/* Footer */
+.card-footer {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    text-align: center;
+}
+
+.card-footer span {
+    display: block;
+    font-size: 11px;
+    opacity: 0.7;
+    margin-bottom: 8px;
+}
+
+.footer-icons {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+
+.footer-icons lightning-icon {
+    --slds-c-icon-color-foreground-default: rgba(255, 255, 255, 0.6);
+}
+
+/* Loading State */
+.profile-card lightning-spinner {
+    margin: 40px auto;
+}
+
+/* Error State */
+.slds-text-color_error {
+    color: #ffd6d6 !important;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+    .profile-card {
+        border-radius: 0;
+        max-width: 100%;
+    }
+    
+    .info-content {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 4px;
+    }
+    
+    .info-label {
+        min-width: auto;
+    }
+}

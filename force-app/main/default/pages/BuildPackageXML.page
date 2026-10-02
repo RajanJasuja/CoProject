@@ -1,0 +1,10 @@
+<apex:page standardController="Work_Package__c" extensions="BuildPackageXMLCtrl" action="{!init}" showHeader="false">
+    <apex:outputPanel id="redirectPanel" >
+        <apex:outputText rendered="true">
+            <script type="text/javascript">
+                alert('{!sMessage}');
+                window.top.location.href = '{!redirectUrl}';
+            </script>
+        </apex:outputText>
+    </apex:outputPanel>
+</apex:page>

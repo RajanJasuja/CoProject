@@ -1,0 +1,87 @@
+<apex:page standardController="Test_Case__c" extensions="EditTestCaseStepExtension"> 
+	<script>
+		function Cancel_Click(stepno,stepdescription,expresult){
+			document.getElementById(stepno).value= '';
+			document.getElementById(stepdescription ).value= '';
+			document.getElementById(expresult).value= '';
+		}
+        function checkAll(cb){
+            var inputElem = document.getElementsByTagName("input");
+            for(var i=0; i < inputElem.length; i++){
+                if(inputElem[i].id.indexOf("checkedone")!=-1)
+                inputElem[i].checked = cb.checked;
+            }
+        }		
+	</script>
+	<!--Section Header-->
+	<apex:sectionHeader title="Test Case / Test Case Step" subtitle="Add / Edit Test Case Step(s)"/>
+	<apex:form >
+		<apex:pageMessages />
+		<!--PageBlock : Test Case Record -->
+		 <apex:pageBlock title="Test Case: {!Test_Case__c.Name}" id="pbAddCase">
+			 <apex:pageBlockButtons Location="top">	    
+			     <apex:commandButton id="btnCancel" value="Go Back" action="{!cancel}"/>
+			 </apex:pageBlockButtons>
+		 </apex:pageBlock>
+	</apex:form>
+
+	<apex:form id="formAddStep">
+		<!--PageBlock : Add Step against Test Case -->
+		<apex:pageBlock title="Add Step" id="pbAddStep">
+		 <apex:pageBlockButtons location="top">
+		 <apex:commandButton id="btnAddStep" value="Add Step" reRender="formAddStep,formUpdateSteps"  action="{!addTestCaseStep}" status="addStepStatus"/>
+		 <apex:commandButton id="btnCancelStep" immediate="true" reRender="pbAddStep"  status="CancelStepStatus" value="Clear" onclick="Cancel_Click('{!$Component.stepnumber}','{!$Component.stepdescription}','{!$Component.expectedresult}')"/>
+		 <apex:actionstatus id="addStepStatus" starttext="Adding..."/>
+		 </apex:pageBlockButtons>
+		 <table border="0" width="100%">
+		     <tr>
+		         <td style="text-align:right"><span class="labelCol">Step Number </span></td>
+		         <td><apex:inputfield id="stepnumber" value="{!newTestCaseStep.Step_Number__c}" style="width:50px;" required="true"/></td>
+		         <td style="text-align:right"><span class="labelCol">Step Description</span></td>
+		         <td><apex:inputfield id="stepdescription" value="{!newTestCaseStep.Step_Description__c}" style="width:300px;height:50px" required="true"/></td>
+		         <td style="text-align:right"><span class="labelCol">Expected Result</span></td>
+		         <td><apex:inputfield id="expectedresult" value="{!newTestCaseStep.Expected_Result__c}" style="width:300px;height:50px" required="true"/></td>
+		     </tr>
+		 </table>
+		 </apex:pageBlock>
+	</apex:form>
+	
+	<apex:form id="formUpdateSteps">
+		<apex:pageMessages />  
+		<!--PageBlock : Show Added Steps against Test Case / Edit Test Case Steps -->
+		<apex:pageBlock Title="Test Case Step(s)" id="pbStepDescription">
+			<apex:pageBlockButtons location="top">
+			    <apex:commandButton id="btnUpdateStep" value="Update Selected Step(s)" action="{!updateTestCaseStep}" reRender="formUpdateSteps,formAddStep" status="updateStepStatus" />
+			    <apex:commandButton id="btnRemoveStep" value="Remove Selected Step(s)" action="{!removeTestCaseStep}" reRender="formUpdateSteps,formAddStep"   status="removeStepStatus" />
+			    <apex:actionstatus id="removeStepStatus" starttext="Removing..."/>
+			    <apex:actionstatus id="updateStepStatus" starttext="Updating..."/>
+			</apex:pageBlockButtons>
+			<apex:pageBlockTable value="{!TestCaseSteps}" var="a">
+                <apex:column headerValue="Select" width="25px">
+                    <apex:facet name="header">
+                    <apex:inputCheckbox >
+                        <apex:actionsupport event="onclick" onsubmit="checkAll(this)" rerender="NA"/>
+                    </apex:inputCheckbox>
+                    </apex:facet>	
+				    <apex:inputCheckbox value="{!a.selected}" id="checkedone">
+				    <apex:actionSupport event="onclick" action="{!getSelected}" rerender="NA"/>
+				    </apex:inputCheckbox>
+			    </apex:column>
+			    
+			    <apex:column headerValue="Step Number" >
+			    	<apex:inputField value="{!a.testCsWr.Step_Number__c}" style="width:50px;" required="true"/>
+			    </apex:column>
+			    
+			    <apex:column headerValue="Step Description" >
+			    	<apex:inputField value="{!a.testCsWr.Step_Description__c}" style="width:300px;height:50px" required="true"/>
+			    </apex:column>
+			    
+			    <apex:column headerValue="Expected Result">
+			    	<apex:inputField value="{!a.testCsWr.Expected_Result__c}" style="width:300px;height:50px" required="true" />
+			    </apex:column>
+			</apex:pageBlockTable>
+		</apex:pageBlock>			
+
+	</apex:form>
+
+</apex:page>

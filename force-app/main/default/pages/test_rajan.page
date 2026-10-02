@@ -1,0 +1,26 @@
+<apex:page controller="testController_Rajan" cache="false" id="myPage" showHeader="true" sidebar="true" standardStylesheets="true">  
+  <apex:form id="myform"> 
+  <apex:pageBlock id="mypageBlock">
+  <!-- Creating Project Office picklist and binded with SelectProjectOffice contoller -->
+ <apex:pageblockSection ><apex:pageBlockSectionItem >
+<apex:outputLabel value="Project Office" for="ddProjectOffice"></apex:outputLabel>
+<apex:selectList value="{!SelectProjectOffices}" id="ddlocation" size="1" required="true">
+                        <apex:actionSupport event="onchange" action="{!BuildingListVisibilty}" reRender="ddbuilding,label1" immediate="true"/>
+                        <apex:selectOptions value="{!TestProjectOffices}"/>
+</apex:selectList>
+
+</apex:pageBlockSectionItem>
+
+
+<apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Building" for="ddbuilding"></apex:outputLabel>
+                    <apex:selectList value="{!selectBuilding}" id="ddbuilding" size="1" required="true" disabled="{!EnabledBuilding}">
+                        <apex:selectOptions value="{!Building}"/>
+                    </apex:selectList>
+</apex:pageBlockSectionItem>
+<apex:outputLabel value="{!output}" id="label1"></apex:outputLabel>
+</apex:pageblockSection>
+
+</apex:pageBlock>
+</apex:form>  
+  </apex:page>

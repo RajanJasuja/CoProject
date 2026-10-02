@@ -1,0 +1,11 @@
+<apex:page standardController="Test_Case__c" extensions="EditTestCaseStepExtension">
+    <apex:form >
+        <apex:pageBlock >
+            <apex:pageBlockTable value="{!TestCaseSteps}" var="t">
+                <apex:column value="{!t.testCsWr.Step_Number__c}"/>
+                <apex:column value="{!t.testCsWr.Step_Description__c}"/>
+                <apex:column value="{!t.testCsWr.Expected_Result__c}"/>
+            </apex:pageBlockTable>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

@@ -1,0 +1,5 @@
+<apex:page contentType="mycont" tabStyle="Account">
+<apex:form >
+
+</apex:form>
+ </apex:page>

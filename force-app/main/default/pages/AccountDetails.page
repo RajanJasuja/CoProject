@@ -1,0 +1,27 @@
+<apex:page controller="testController"tabStyle="Account">
+<apex:pageBlock title="Hello {!$User.FirstName}!">
+You are displaying contacts from the <b>{!account.name}</b> account.
+Click a contact's name to view his or her Tasks.
+</apex:pageBlock>
+<apex:pageBlock title="Contacts">
+<apex:form>
+<apex:dataTable value="{!contact}" var="c" >
+<apex:column>
+<apex:outputText value="{!c.Name}"/>
+<apex:actionSupport event="onmouseover" action="{!setTask}" rerender="detail">
+<apex:param name="cid" value="{!c.id}"/>
+</apex:actionSupport>
+</apex:column>
+</apex:dataTable>
+</apex:form>
+</apex:pageBlock>
+<apex:outputPanel id="detail">
+<apex:pageBlock title="Activities">
+<apex:dataTable value="{!taskList}" var="taskAct" rendered="{!NOT(ISNULL(taskList))}" cellPadding="4" border="1">
+<apex:column value="{!taskAct.id}"/>
+<apex:column value="{!taskAct.subject}"/>
+<apex:column value="{!taskAct.Status}"/>
+</apex:dataTable>
+</apex:pageBlock>
+</apex:outputPanel>
+</apex:page>
